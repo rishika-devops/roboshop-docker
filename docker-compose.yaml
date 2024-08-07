@@ -5,14 +5,11 @@ networks:
 services:
   mongodb:
    image: mongodb:1
-   container_name: mongodb
   catalogue:
    image: catalogue:1
-   container_name: catalogue
   nginx:
    image: nginx:1
-   container_name: web
-ports:
-- "80:80"
-depends_on:
-- catalogue
+   ports:
+   - "80:80"
+   depends_on:
+   - catalogue
