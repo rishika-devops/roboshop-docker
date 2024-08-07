@@ -9,8 +9,8 @@ services:
   catalogue:
    image: catalogue:1
    container_name: catalogue
-  web:
-   image: web:1
+  nginx:
+   image: nginx:1
    container_name: web
 ports:
 - "80:80"
