@@ -44,7 +44,7 @@ services:
    container_name: rabbitmq
    environment:
    - RABBITMQ_DEFAULT_USER=roboshop
-   - RABBITMQ_DEFAUT_PASS=roboshop123
+   - RABBITMQ_DEFAULT_PASS=roboshop123
 
   payment:
    container_name: payment
