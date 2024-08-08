@@ -1,0 +1,15 @@
+FROM maven AS build
+WORKDIR /opt/shipping
+COPY  pom.xml /opt/shipping
+RUN mvn dependancy:resolve
+COPY src /opt/shipping/src
+RUN mvn package
+
+
+FROM openjdk:8-jdk
+EXPOSE 8080
+WORKDIR /opt/shipping
+ENV CART_ENDPOINT=cart:8080
+ENV DB_HOST=mysql
+COPY --from=build /opt/shipping/target/shipping-1.0.jar shipping.jar
+CMD ["java","-xmn256m","-xmx768m","jar","shipping.jar"]

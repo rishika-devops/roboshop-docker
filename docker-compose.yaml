@@ -5,11 +5,64 @@ networks:
 services:
   mongodb:
    image: mongodb:1
+   container_name: mongodb
+
   catalogue:
    image: catalogue:1
-  nginx:
-   image: nginx:1
+   container_name: catalogue
+
+  redis:
+   image: redis:1
+   container_name: redis
+
+  user:
+   image: user:1
+   container_name: user
+   depends_on:
+   - redis
+   - mongodb
+
+  cart:
+   image: cart:1
+   container_name: cart
+   depends_on:
+   - redis 
+   - catalogue
+
+  mysql:
+   image: mysql:1
+   container_name: mysql
+
+  shipping:
+   image: shipping:1
+   container_name: shipping
+   depends_on:
+   - mysql
+
+  rabbitmq:
+   image: rabbitmq:1
+   container_name: rabbitmq
+   environment:
+   - RABBITMQ_DEFAULT_USER=roboshop
+   - RABBITMQ_DEFAUT_PASS=roboshop123
+
+  payment:
+   container_name: payment
+   image: payment:1
+   depends_on:
+   - rabbitmq
+   - user
+   - cart
+  
+  
+  web:
+   image: web:1
+   container_name: web
    ports:
    - "80:80"
    depends_on:
    - catalogue
+   - cart
+   - user
+   - shipping
+   - payment
