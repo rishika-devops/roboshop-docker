@@ -1,7 +1,7 @@
 FROM maven AS build
 WORKDIR /opt/shipping
 COPY  pom.xml /opt/shipping
-RUN mvn dependancy:resolve
+RUN mvn dependency:resolve
 COPY src /opt/shipping/src
 RUN mvn package
 
