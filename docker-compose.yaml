@@ -12,7 +12,7 @@ services:
    container_name: catalogue
 
   redis:
-   image: redis:1
+   image: redis
    container_name: redis
 
   user:
@@ -40,7 +40,7 @@ services:
    - mysql
 
   rabbitmq:
-   image: rabbitmq:1
+   image: rabbitmq
    container_name: rabbitmq
    environment:
    - RABBITMQ_DEFAULT_USER=roboshop
