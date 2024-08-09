@@ -2,6 +2,12 @@ networks:
   default:
     external: true
     name: roboshop
+volumes:
+  mongodb: #docker volume create mongodb
+  redis:
+  mysql:
+  rabbitmq:
+
 services:
   mongodb:
    image: mongodb:1
@@ -19,7 +25,7 @@ services:
    image: redis
    container_name: redis
    volumes:
-   - source: mredis
+   - source: redis
      target: /data
      type: volume
 
